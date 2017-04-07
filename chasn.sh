@@ -13,6 +13,7 @@ then
   if [ ! -d /usr/local/chasn ]
   then
     mkdir -p /usr/local/chasn;
+    mkdir /usr/local/chasn/build-tools;
 
     cp $dldir/chasn.sh $dldir/51-android.rules adb-setup.sh /usr/local/chasn;
 
@@ -42,6 +43,7 @@ then
   echo "alias chasn='sh $chasn/chasn.sh'" >> ~/.bashrc
   echo "alias sdkmanager='$chasn/tools/bin/sdkmanager --sdk_root=$chasn' #chasn" >> ~/.bashrc
   echo "alias android='$chasn/tools/android' #chasn" >> ~/.bashrc
+  echo "alias ant='$chasn/ant/bin/ant' #chasn" >> ~/.bashrc
 
   # binaries
   if [ "$2" = "dl" ]
@@ -70,6 +72,8 @@ then
     echo "EXTRACTED: ndk"
   fi
 
+  ln -s $chasn/tools $chasn/build-tools/25.0.2
+
   echo "\nINSTALLED: binaries\n"
 
 
@@ -85,6 +89,7 @@ then
   alias chasn='sh $chasn/chasn.sh'
   alias sdkmanager='$chasn/tools/bin/sdkmanager --sdk_root=$chasn/'
   alias android='$chasn/tools/android'
+  alias ant='$chasn/ant/bin/ant' #chasn
 
   export PATH=$PATH:$chasn/ant/bin
 
