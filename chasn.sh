@@ -61,10 +61,11 @@ then
     ggID='0B3WqEY74PP5AZ3ZjVjRjVWZObVE' # ndk
     curl -Lb /tmp/gcokie "${ggURL}&confirm=${getcode}&id=${ggID}" -o "ndk.bzip2"
   else
+    echo "EXTRACTING: ant"
     tar -xjf $2/ant.bzip2
-    echo "EXTRACTED: ant"
+    echo "EXTRACTED: ant\nEXTRACTING: arm-tools"
     tar -xjf $2/arm-tools.bzip2 && mv arm-build-tools tools;
-    echo "EXTRACTED: arm-tools"
+    echo "EXTRACTED: arm-tools\nEXTRACTING: ndk"
     tar -xjf $2/ndk.bzip2
     echo "EXTRACTED: ndk"
   fi
@@ -108,6 +109,8 @@ then
   if [ -d /usr/local/chasn ]
   then
     sh $chasn/adb-setup.sh
+    echo "ADB is ready for use."
+    exit 0;
   else
     echo "Please install chasn first."
   fi
