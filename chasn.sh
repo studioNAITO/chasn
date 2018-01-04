@@ -6,6 +6,7 @@ echo "chasn v1.0\n"
 
 
 if [ "$1" = "fetch" ]
+then
   # directory
   if [ ! -d /usr/local/chasn ]
   then
@@ -48,6 +49,7 @@ if [ "$1" = "fetch" ]
   echo "DOWNLOADED: binaries"
 
   rm $chasn/gcokie
+
 fi
 
 if [ "$1" = "install" ]
