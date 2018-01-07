@@ -2,7 +2,7 @@
 
 ### install
 ```shell
-sh chasn.sh install
+curl https://raw.githubusercontent.com/hnerv/chasn/master/chasn | sh
 ```
 
 ### Usage

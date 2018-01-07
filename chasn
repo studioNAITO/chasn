@@ -13,6 +13,7 @@ then
   # bashrc
   echo 'export chasn=/usr/local/chasn #chasn' >> ~/.bashrc
 
+  echo "export PATH=$PATH:$chasn/ant/bin:$chasn/ndk:$chasn/tools #chasn" >> ~/.bashrc
   echo "export ANDROID_HOME=$chasn #chasn" >> ~/.bashrc
   echo "export ANDROID_SWT=$chasn/tools/lib/arm #chasn" >> ~/.bashrc
   echo 'export NDK_KNOWN_ABIS="armeabi-v7a armeabi-v7a-hard armeabi" #chasn' >> ~/.bashrc
@@ -33,23 +34,23 @@ then
   export NDK_KNOWN_ARCHS="arm x86"
   export HOST_ARCH="arm"
 
-  alias chasn="sh $chasn/chasn.sh"
+  alias chasn="sh $chasn/chasn"
   alias sdkmanager="$chasn/tools/bin/sdkmanager --sdk_root=$chasn/"
   alias android="$chasn/tools/android"
   alias ant="$chasn/ant/bin/ant" #chasn
 
-  export PATH=$PATH:$chasn/ant/bin
+  export PATH=$PATH:$chasn/ant/bin:$chasn/ndk:$chasn/tools
 
   echo "INSTALLED: bashrc\n"
-  
+ 
   echo "EXTRACTING: ant"
-  tar -xjf $chasn/.bin/$bin_ant
+  tar -xjf $chasn/.bin/$bin_ant --directory $chasn
   echo "EXTRACTED: ant"
   echo "EXTRACTING: arm-tools"
-  tar -xjf $chasn/.bin/$bin_arm_tools && mv arm-build-tools tools;
+  tar -xjf $chasn/.bin/$bin_arm_tools --directory $chasn && mv $chasn/arm-build-tools $chasn/tools;
   echo "EXTRACTED: arm-tools"
   echo "EXTRACTING: ndk"
-  tar -xjf $chasn/.bin/$bin_ndk
+  tar -xjf $chasn/.bin/$bin_ndk --directory $chasn
   echo "EXTRACTED: ndk"
 
   ln -s $chasn/tools $chasn/build-tools/25.0.2
@@ -59,9 +60,10 @@ fi
 
 if [ "$1" = "remove" ]
 then
-  rm -r /usr/local/chasn
   cp ~/.bashrc ~/.bashrc_backup
   sed '/#chasn/,/^/d' < ~/.bashrc_backup > ~/.bashrc
+
+  rm -r /usr/local/chasn
   echo "removed."
 
   exit 0;
@@ -117,5 +119,7 @@ curl -Lb $chasn/gcokie "${ggURL}&confirm=${getcode}&id=${ggID}" -o "${chasn}/.bi
 echo "Finished Downloading."
 
 rm $chasn/gcokie
+
+sh $chasn/chasn install
 
 exit 0;
