@@ -53,7 +53,7 @@ then
   tar -xjf $chasn/.bin/$bin_ndk --directory $chasn
   echo "EXTRACTED: ndk"
 
-  ln -s $chasn/tools $chasn/build-tools/25.0.2
+  ln -s $chasn/tools $chasn/build-tools/25.2.2
 
   exit 0;
 fi
