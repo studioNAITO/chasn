@@ -49,7 +49,6 @@ then
   echo "DOWNLOADED: binaries"
 
   rm $chasn/gcokie
-
 fi
 
 if [ "$1" = "install" ]
